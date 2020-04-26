@@ -44,19 +44,27 @@ table td{
 
 <body>
 <?php
-// /* 日期設定 */
-// $month = ($_GET['m'] ? $_GET['m'] : date('m'));
-// $year = ($_GET['year'] ? $_GET['year'] : date('Y'));
+
+if (!empty($_GET['month'])) {
+    $m = $_GET['month'];
+ } else {
+    $m = date("m");
+ }
+ 
+ if (!empty($_GET['year'])) {
+    $year = $_GET['year'];
+ } else {
+    $year = date("Y");
+ }
 
 
-$year=date("Y");
-$m=date("m");
-// $d=date("d");
-
+//上下個月
 if(isset($_GET["m"])){
     $m=$_GET["m"];    
+}else{
+    //這個月
+    $m=date("m");
 }
-
 
 ?>
 
@@ -81,26 +89,13 @@ if(($m+1)<=12){
 ?>
 
 <!-- 上個月 -->
-<a href="index.php?m=<?=$lastmonth;?>&year<?$lastyear;?>">上一個月(<?=$lastmonth;?><?$lastyear;?>)</a> ｜
+<a href="index.php?m=<?=$lastmonth;?>&year=<?=$lastyear;?>">上一個月(<?=$lastmonth;?>)</a> ｜
 <span>本月(<?=$m;?>)</span> ｜
 <!-- 下個月 -->
-<a href="index.php?m=<?=$nextmonth;?>&year<?$nextyear;?>">下一個月(<?=$nextmonth;?><?$nextyear;?>)</a>
+<a href="index.php?m=<?=$nextmonth;?>&year=<?=$nextyear;?>">下一個月(<?=$nextmonth;?>)</a>
 
 
 
-
-
-<!-- <a href="index.php?m=<?=$m-1;?>">上一個月(<?=$m-1;?>)</a> ｜
-<span>本月(<?=$m;?>)</span> ｜
-<a href="index.php?m=<?=$m+1;?>">下一個月(<?=$m+1;?>)</a> -->
-
-
-
-
-
-<!-- // date_default_timezone_set('Asia/Taipei');
- // $thisyear=year("y",strtotime($firstDay)); 
-?> -->
 <div>年份：<?=$year;?></div>
 
 <!-- 針對月份間的表格排版調整 -->
