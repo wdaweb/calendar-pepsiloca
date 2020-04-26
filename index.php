@@ -6,28 +6,48 @@
     <title>萬年曆作業</title>
 <style>
 /* bootstrap內有預設 */
-*{
+body{
     margin:0;
     padding:0;
     box-sizing:border-box;
     text-align:center;
+    position:relative;
+    font-family: 'Verdana','微軟正黑' , sans-serif;
+    color:#ff8282;
+    /* color:#CD5360; */
+    background:#f6dacf;
+
 }
+
 table{
-    /* width:400px;
-    height:400px; */
+    width:500px;
+    height:500px;
+    margin:50px 100px;
     border-collapse:collapse;
+    text-align:center;
+    background:white;
+    border-radius:20px;
+    /* box-shadow: 0 3 10px; */
 }
 
 table td{
-    border: 1px solid gray;
+    /* border: 1px solid white;
+    border-radius:20px; */
+
     padding:5px;
-    text-align:center;    
+    text-align:center;
+        
 }
+
+.weekend{
+    color:#6c648b;
+}
+
 
 .wrapper{
     display:flex;
     max-width:1000px;
-    flex-wrap:wrap;  
+    flex-wrap:wrap; 
 }
 
 .calender{
@@ -37,14 +57,25 @@ table td{
 
 .calender td{
     height:35px;
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    
+}
+
+.title{
+    color:#E52A6F;
+    font-family: 'Nunito', sans-serif;
+    font-size:50px;
+}
+
+table td:first-child , 
+table td:last-child{
+    color:#6c648b;
 }
 
 </style>
-</head>
 
-<body>
 <?php
-
 if (!empty($_GET['month'])) {
     $m = $_GET['month'];
  } else {
@@ -57,6 +88,9 @@ if (!empty($_GET['month'])) {
     $year = date("Y");
  }
 
+// $year=date("Y");
+// $m=date("m");
+// $d=date("d");
 
 //上下個月
 if(isset($_GET["m"])){
@@ -66,7 +100,19 @@ if(isset($_GET["m"])){
     $m=date("m");
 }
 
+
+// $today=date("Y-m-d");
+// $todayDays=date("d");
+// $start="$year-$m-01";
+// $startDay=date("w",strtotime($start));
+// $days=date("t",strtotime($start));
+// $endDay=date("w",strtotime($year-$m-$days));
+
+// echo $today;
+
 ?>
+
+
 
 <?php
 
@@ -88,30 +134,34 @@ if(($m+1)<=12){
 }
 ?>
 
+<div class="title"><?=$year;?></div>
+
 <!-- 上個月 -->
-<a href="index.php?m=<?=$lastmonth;?>&year=<?=$lastyear;?>">上一個月(<?=$lastmonth;?>)</a> ｜
+<a href="0425-12.all.calender.php?m=<?=$lastmonth;?>&year=<?=$lastyear;?>">上一個月(<?=$lastmonth;?>)</a> ｜
+
 <span>本月(<?=$m;?>)</span> ｜
+
 <!-- 下個月 -->
-<a href="index.php?m=<?=$nextmonth;?>&year=<?=$nextyear;?>">下一個月(<?=$nextmonth;?>)</a>
+<a href="0425-12.all.calender.php?m=<?=$nextmonth;?>&year=<?=$nextyear;?>">下一個月(<?=$nextmonth;?>)</a>
 
-
-
-<div>年份：<?=$year;?></div>
 
 <!-- 針對月份間的表格排版調整 -->
 <div class="calender">   
 <table>
 <!-- 自動產生月份 ＝為echo的意思 -->
 <!-- 和日期合併格子 再看如何分開 -->
+<div class="title">
 <tr><td colspan="7">月份:<?=$m;?></td></tr>
+</div>
+
 <tr>
-    <td>日</td>
+    <td class="weekend">日</td>
     <td>一</td>
     <td>二</td>
     <td>三</td>
     <td>四</td>
     <td>五</td>
-    <td>六</td>
+    <td class="weekend">六</td>
 </tr>
 <?php
 // 年份.月份使用變數 讓其自動產生
@@ -129,6 +179,7 @@ $monthDays=date("t",strtotime($firstDay));
 
 for($i=0;$i<6;$i++){
     echo "<tr>";
+
     for($j=0;$j<7;$j++){
         // 判斷從第一列哪一格開始印 星期還沒開始的地方印空白
         if($i==0 && $j<$firstDayWeek){
@@ -143,10 +194,6 @@ for($i=0;$i<6;$i++){
             if($num<=$monthDays){
                echo $num; 
             }   
-            // }else{
-            //     // 全行空白 撐起最後一格空間 但建議不要用 要控制格子尺寸
-            //     echo "　";
-            // }
             echo "</td>";
         }
     
@@ -160,7 +207,6 @@ for($i=0;$i<6;$i++){
 
 
 ?>
+
 </table>
-</div>     
-</body>
-</html>
+</div> 
