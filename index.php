@@ -16,9 +16,8 @@ body{
     font-weight:bold;
     text-shadow: 0px 1px 4px #ccc9c9;
     color:#418eaa;
-    /* background-image:url(https://i.imgur.com/g30bPb8.jpg);
-    background-attachment:fixed; */
-    background:#f6dacf;
+    background:url("https://imgur.com/g30bPb8.jpg");
+    background-attachment:fixed;
 }
 
 table{
