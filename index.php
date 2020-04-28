@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>試驗萬年曆作業</title>
+    <title>萬年曆作業</title>
 
 <style>
 /* bootstrap內有預設 */
@@ -26,23 +26,34 @@ table{
     /* position:absolute; */
     border-collapse:collapse;
     text-align:center;
-    background:#bde6f4;
+    background:rgba(189,230,244,0.7);
     border-radius:25px;
     box-shadow: 0px 10px 20px #caa799;
+    animation: demo4_box 10s linear infinite;
 }
 
+@keyframes demo4_box{
+        0%{
+         box-shadow:0px 0px 1rem 1px #e7c1b2,0px 0px 1rem 1px #e7c1b2, inset 0px 0px  1px #e7c1b2;
+        }   
+        
+        50%{
+         box-shadow:0px 0px 1rem 3px white,0px 0px 1rem 3px white, inset 0px 0px 1rem 1px white;    
+        }
+        
+        100%{
+         box-shadow:0px 0px 1rem 1px #e7c1b2,0px 0px 1rem 1px #e7c1b2, inset 0px 0px  1px #e7c1b2;    
+        }
+
+    }
+
 table td{
-    /* border: 1px solid white;
-    border-radius:20px; */
     padding:5px;
     text-align:center;    
 }
 
 
 .calender{
-    /* display:flex;
-    justify-content:center; */
-    /* width:25%; */
     position:absolute;
     padding:30px;
     top:10%;
@@ -52,30 +63,15 @@ table td{
 .btn1{
     display:inline-block;
     position:absolute;
-    top:60px;
+    top:125px;
     left:120px;
-    /* width:50px; */
 
 }
 .btn2{
     display:inline-block;
     position:absolute;
-    top:60px;
+    top:125px;
     left:405px;
-/* .btn1{
-    display:inline-block;
-    position:absolute;
-    top:75px;
-    left:110px;
-    /* width:50px; */
-
-/* } */
-/* .btn2{
-    display:inline-block;
-    position:absolute;
-    top:75px;
-    left:395px; */
-
 } */
 
 
@@ -87,17 +83,16 @@ table td{
     color:#E52A6F;
     font-family: 'Nunito', sans-serif;
     font-size:50px;
-    position:absolute;
-    top:40px;
-    left:510px;
-
+    position:relative;
+    text-align:center;
+    top:0px;
 }
 
 .mm{
     color:#E52A6F;
     font-size:30px;
     position:absolute;
-    top:50px;
+    top:120px;
     left:250px;
 }
 
@@ -123,9 +118,6 @@ if (!empty($_GET['month'])) {
     $year = date("Y");
  }
 
-// $year=date("Y");
-// $m=date("m");
-// $d=date("d");
 
 //上下個月
 if(isset($_GET["m"])){
@@ -159,13 +151,12 @@ if(($m+1)<=12){
 ?>
 
 
-<div class="title"><?=$year;?></div>
 
 <!-- 針對月份間的表格排版調整 -->
 <div class="calender">   
+    <div class="title"><?=$year;?></div>
 <table>
 <!-- 自動產生月份 ＝為echo的意思 -->
-<!-- 和日期合併格子 再看如何分開 -->
     <div>
     <tr><div class="mm" colspan="7"><?=$m;?>月</div></tr>
 
@@ -173,24 +164,14 @@ if(($m+1)<=12){
         <!-- 上個月 -->
         <a href="index.php?m=<?=$lastmonth;?>&year=<?=$lastyear;?>"><img src="https://i.imgur.com/Qi0uwPt.png"></a> 
         </div>
-        <!-- <a href="index.php?m=<?=$lastmonth;?>&year=<?=$lastyear;?>"><img src="https://i.imgur.com/f3OCVe8.png"></a> 
-        </div> -->
 
-        <!-- <span>本月(<?=$m;?>)</span> ｜ -->
-      
 
         <div class="btn2">
         <!-- 下個月 -->
         <a href="index.php?m=<?=$nextmonth;?>&year=<?=$nextyear;?>"><img src="https://i.imgur.com/85trdo9.png"></a>
-        <!-- <a href="index.php?m=<?=$nextmonth;?>&year=<?=$nextyear;?>"><img src="https://i.imgur.com/dReIF2P.png"></a> -->
-        </div>
         
-
         
     </div>
-
-
-
 
 
 <tr>
@@ -202,6 +183,7 @@ if(($m+1)<=12){
     <td>五</td>
     <td>六</td>
 </tr>
+
 <?php
 // 年份.月份使用變數 讓其自動產生
 $firstDay= "$year-$m-01";
